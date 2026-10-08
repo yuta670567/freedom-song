@@ -1,525 +1,931 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Freedom Song</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Freedom Song｜Aメロ コード探索</title>
 
 <style>
-* {
-  box-sizing: border-box;
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #172033;
+  background: #f7f9fc;
 }
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-  background: #f4f5f7;
-  color: #202124;
+  padding: 18px 14px 40px;
 }
 
-header {
-  background: white;
-  text-align: center;
-  padding: 26px 15px 22px;
-  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+.app {
+  max-width: 900px;
+  margin: auto;
 }
 
 h1 {
-  margin: 0;
-  font-size: 32px;
+  font-size: 26px;
+  margin: 4px 0;
 }
 
-header p {
-  margin: 7px 0 0;
-  color: #777;
+.muted { color: #667085; }
+
+.card {
+  background: #fff;
+  border: 1px solid #dbe2ea;
+  border-radius: 20px;
+  padding: 16px;
+  margin: 14px 0;
+  box-shadow: 0 2px 10px #00000008;
 }
 
-main {
-  max-width: 650px;
-  margin: auto;
-  padding: 24px 18px 50px;
-}
-
-.section-title {
-  text-align: center;
-  margin: 18px 0 15px;
-  font-size: 22px;
-}
-
-.help {
-  text-align: center;
-  color: #777;
-  font-size: 14px;
-  margin-bottom: 18px;
-}
-
-.chords {
+.grid4 {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(4,1fr);
+  gap: 8px;
 }
 
-.chord {
-  background: white;
-  border: 0;
-  border-radius: 18px;
-  padding: 20px 5px 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,.08);
-  touch-action: manipulation;
-}
-
-.chord:active {
-  transform: scale(.96);
-}
-
-.chord-name {
-  display: block;
-  font-size: 27px;
-  font-weight: 750;
-  color: #3478f6;
-}
-
-.role {
-  display: block;
-  font-size: 11px;
-  color: #888;
-  margin-top: 5px;
-}
-
-.builder {
-  background: white;
-  margin-top: 30px;
-  padding: 20px;
-  border-radius: 22px;
-  box-shadow: 0 4px 14px rgba(0,0,0,.06);
-}
-
-.progression {
-  min-height: 76px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-  padding: 10px 0 18px;
-}
-
-.empty {
-  color: #aaa;
-  font-size: 15px;
-}
-
-.step {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.step-code {
-  min-width: 48px;
-  padding: 10px 11px;
-  border-radius: 12px;
-  background: #eef3ff;
-  color: #3478f6;
-  font-weight: 750;
-  font-size: 20px;
-  text-align: center;
-  transition: .15s;
-}
-
-.step-code.playing {
-  background: #3478f6;
-  color: white;
-  transform: scale(1.1);
-}
-
-.arrow {
-  color: #999;
-  font-size: 18px;
-}
-
-.controls {
+.grid2 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2,1fr);
   gap: 10px;
 }
 
-.small-button {
-  border: 0;
-  background: #eeeeef;
-  border-radius: 13px;
-  padding: 13px;
-  font-size: 15px;
-}
-
-.play {
-  grid-column: 1 / -1;
-  border: 0;
-  background: #202124;
-  color: white;
-  border-radius: 15px;
-  padding: 17px;
-  font-size: 19px;
-  font-weight: 650;
-}
-
-.play:active {
-  transform: scale(.98);
-}
-
-.tempo-box {
-  margin-top: 20px;
-  padding-top: 17px;
-  border-top: 1px solid #eee;
-}
-
-.tempo-label {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  font-size: 14px;
-  color: #666;
-}
-
-input[type=range] {
-  width: 100%;
-}
-
-.explanation {
-  margin-top: 25px;
-  background: #eaf2ff;
-  border-radius: 18px;
-  padding: 18px;
-}
-
-.explanation-title {
+label {
   font-weight: 700;
-  margin-bottom: 7px;
-}
-
-#meaning {
-  line-height: 1.6;
-  color: #555;
   font-size: 14px;
 }
 
-.tip {
-  margin-top: 25px;
+select, button {
+  width: 100%;
+  min-height: 48px;
+  border-radius: 13px;
+  border: 1px solid #ccd5df;
+  background: #fff;
+  padding: 8px;
+  font-size: 16px;
+}
+
+button {
+  font-weight: 700;
+}
+
+.primary {
+  background: #3478f6;
+  color: white;
+  border: 0;
+}
+
+.progress {
+  font-size: 20px;
+  font-weight: 800;
   text-align: center;
-  color: #777;
+  background: #f2f5f9;
+  border-radius: 14px;
+  padding: 14px;
+  margin-top: 12px;
+}
+
+.presets {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 8px;
+}
+
+.small {
+  font-size: 12px;
+}
+
+.status {
+  text-align: center;
+  color: #667085;
+  margin: 12px 0;
+}
+
+.timeline {
+  display: flex;
+  align-items: stretch;
+  gap: 3px;
+  min-height: 85px;
+  overflow-x: auto;
+}
+
+.seg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #eef3f8;
+  border-radius: 9px;
+  padding: 4px;
+  min-width: 48px;
+  text-align: center;
+  font-size: 11px;
+}
+
+.seg b {
   font-size: 13px;
-  line-height: 1.7;
+}
+
+@media(max-width:560px) {
+  .grid4 {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  h1 {
+    font-size: 23px;
+  }
+
+  .presets {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Freedom Song</h1>
-  <p>コード進行を、耳で遊ぼう。</p>
-</header>
+<main class="app">
 
-<main>
+<div class="muted">Freedom Song / Capo 1</div>
 
-  <div class="section-title">① コードを選ぶ</div>
-  <div class="help">押すたびに下のコード進行へ追加されます</div>
+<h1>Aメロ コード探索・精密版</h1>
 
-  <div class="chords">
+<div class="muted">
+録音解析した発音タイミング＋確定済み音程。
+4区間すべて自由に変更できます。
+</div>
 
-    <button class="chord" onclick="addChord('C')">
-      <span class="chord-name">C</span>
-      <span class="role">帰ってきた感じ</span>
-    </button>
 
-    <button class="chord" onclick="addChord('Dm')">
-      <span class="chord-name">Dm</span>
-      <span class="role">少し切ない</span>
-    </button>
+<!-- メロディー -->
+<section class="card">
 
-    <button class="chord" onclick="addChord('Em')">
-      <span class="chord-name">Em</span>
-      <span class="role">静かな陰り</span>
-    </button>
+<h3>歌詞・メロディー</h3>
 
-    <button class="chord" onclick="addChord('F')">
-      <span class="chord-name">F</span>
-      <span class="role">広がる感じ</span>
-    </button>
+<div class="timeline">
 
-    <button class="chord" onclick="addChord('G')">
-      <span class="chord-name">G</span>
-      <span class="role">Cへ進みたがる</span>
-    </button>
+<div class="seg">
+<b>ほー</b>
+F
+<span>0.51s</span>
+</div>
 
-    <button class="chord" onclick="addChord('Am')">
-      <span class="chord-name">Am</span>
-      <span class="role">切ない安定</span>
-    </button>
+<div class="seg">
+<b>こ</b>
+F
+<span>0.23s</span>
+</div>
 
-  </div>
+<div class="seg">
+<b>りー！</b>
+D♯→C♯
+<span>0.67s</span>
+</div>
 
-  <div class="builder">
+<div class="seg">
+<b>休</b>
+—
+<span>0.19s</span>
+</div>
 
-    <div class="section-title">② 自分のコード進行</div>
+<div class="seg">
+<b>か</b>
+↓G♯
+<span>0.17s</span>
+</div>
 
-    <div class="progression" id="progression">
-      <span class="empty">上のコードを押してみよう</span>
-    </div>
+<div class="seg">
+<b>ぶっ</b>
+F
+<span>0.44s</span>
+</div>
 
-    <div class="controls">
+<div class="seg">
+<b>て</b>
+D♯
+<span>0.43s</span>
+</div>
 
-      <button class="small-button" onclick="undoChord()">
-        ↩ 1つ戻す
-      </button>
+<div class="seg">
+<b>るぅ！</b>
+C♯
+<span>0.90s</span>
+</div>
 
-      <button class="small-button" onclick="clearProgression()">
-        クリア
-      </button>
+</div>
 
-      <button class="play" id="playButton" onclick="playProgression()">
-        ▶ 最初から聴く
-      </button>
+<p class="small muted">
+録音上の開始：
+ほー 1.54 /
+こ 2.05 /
+りー 2.28 /
+休 2.95 /
+か 3.14 /
+ぶっ 3.31 /
+て 3.76 /
+るぅ 4.19 秒
+</p>
 
-    </div>
+</section>
 
-    <div class="tempo-box">
-      <div class="tempo-label">
-        <span>テンポ</span>
-        <strong><span id="bpmValue">90</span> BPM</strong>
-      </div>
 
-      <input
-        id="tempo"
-        type="range"
-        min="50"
-        max="160"
-        value="90"
-        oninput="updateTempo()"
-      >
-    </div>
+<!-- コード -->
+<section class="card">
 
-  </div>
+<h3>4区間のコード</h3>
 
-  <div class="explanation">
-    <div class="explanation-title">🎧 今のコード</div>
-    <div id="meaning">
-      コードを押すと、そのコードの感じをここに表示します。
-    </div>
-  </div>
+<div class="grid4" id="selectors"></div>
 
-  <div class="tip">
-    まずは<br>
-    <strong>C → G → Am → F</strong><br>
-    を作って聴いてみよう。<br><br>
-    そのあと順番を変えると、曲の印象がどう変わる？
-  </div>
+<div class="progress" id="progression"></div>
+
+<p class="small muted">
+「るぅ！」も固定していません。
+4つすべて自由に変更できます。
+</p>
+
+</section>
+
+
+<!-- 切替位置 -->
+<section class="card">
+
+<h3>コードチェンジ位置</h3>
+
+<div class="grid4"
+     style="grid-template-columns:repeat(3,1fr)">
+
+<label>
+① → ②
+<select id="s1"></select>
+</label>
+
+<label>
+② → ③
+<select id="s2"></select>
+</label>
+
+<label>
+③ → ④
+<select id="s3"></select>
+</label>
+
+</div>
+
+</section>
+
+
+<!-- プリセット -->
+<section class="card">
+
+<h3>候補を一発セット</h3>
+
+<div class="presets" id="presets"></div>
+
+</section>
+
+
+<!-- 再生 -->
+<div class="grid2">
+
+<button id="melody">
+♪ メロディーだけ
+</button>
+
+<button id="both" class="primary">
+▶ メロディー＋コード
+</button>
+
+</div>
+
+<div class="status" id="status">
+コードを選んで再生してください
+</div>
+
+<button id="reset">
+↻ リセット
+</button>
 
 </main>
 
+
 <script>
 
-const chordData = {
-  C: {
-    notes: [261.63, 329.63, 392.00, 523.25],
-    text: "Cは「家」のようなコード。ここに来ると、落ち着いたり終わった感じがしやすい。"
-  },
+/* ==============================
+   コード候補
+============================== */
 
-  Dm: {
-    notes: [293.66, 349.23, 440.00, 587.33],
-    text: "Dmは少し切なさを持ちながら、次へ動いていく感じを作りやすい。"
-  },
+const names = [
+"C",
+"Dm",
+"Em",
+"F",
+"G",
+"Am",
+"C/E",
+"G/B",
+"F/A",
+"Fmaj7",
+"G7",
+"Am7",
+"Dm7",
+"Em7",
+"Cadd9",
+"Fadd9",
+"Gsus4",
+"Csus2",
+"Csus4"
+];
 
-  Em: {
-    notes: [329.63, 392.00, 493.88, 659.25],
-    text: "Emは暗すぎない陰り。流れの途中に入れると、少し景色が変わる。"
-  },
+const defaults = [
+"C",
+"Am",
+"Dm",
+"F"
+];
 
-  F: {
-    notes: [349.23, 440.00, 523.25, 698.46],
-    text: "Fは景色が広がるような感じ。CからFへ行くと、少し外へ出たように感じやすい。"
-  },
 
-  G: {
-    notes: [392.00, 493.88, 587.33, 783.99],
-    text: "Gは『まだ終われない』感じが強いコード。GのあとにCを鳴らすと、帰ってきた感覚を比べやすい。"
-  },
+/* ==============================
+   セレクトボックス作成
+============================== */
 
-  Am: {
-    notes: [220.00, 261.63, 329.63, 440.00],
-    text: "Amは切なさがありながら比較的落ち着くコード。Cとは違う種類の安定感がある。"
-  }
+const holder =
+document.querySelector("#selectors");
+
+for(let i=0;i<4;i++){
+
+  const label =
+  document.createElement("label");
+
+  label.textContent =
+  (i+1) + "区間";
+
+  const select =
+  document.createElement("select");
+
+  select.id = "c"+i;
+
+  names.forEach(name => {
+
+    const option =
+    new Option(name,name);
+
+    select.add(option);
+
+  });
+
+  select.value =
+  defaults[i];
+
+  select.onchange =
+  update;
+
+  label.appendChild(select);
+
+  holder.appendChild(label);
+}
+
+
+/* ==============================
+   コード変更位置
+============================== */
+
+const points = [
+
+["こ",0.51],
+["りー！",0.74],
+["休み",1.41],
+["か",1.60],
+["ぶっ",1.77],
+["て",2.22],
+["るぅ！",2.65]
+
+];
+
+["s1","s2","s3"]
+.forEach((id,i)=>{
+
+  const select =
+  document.querySelector("#"+id);
+
+  points.forEach(point=>{
+
+    select.add(
+      new Option(
+        point[0]+"から",
+        point[1]
+      )
+    );
+
+  });
+
+  select.value =
+  [0.51,1.41,2.65][i];
+
+});
+
+
+/* ==============================
+   コード構成音
+   Capo1基準のギターコード
+============================== */
+
+const chordMap = {
+
+C:
+[261.63,329.63,392],
+
+Dm:
+[293.66,349.23,440],
+
+Em:
+[164.81,196,246.94,329.63],
+
+F:
+[174.61,220,261.63,349.23],
+
+G:
+[196,246.94,293.66,392],
+
+Am:
+[220,261.63,329.63],
+
+"C/E":
+[164.81,261.63,329.63,392],
+
+"G/B":
+[246.94,293.66,392,493.88],
+
+"F/A":
+[220,261.63,349.23,440],
+
+Fmaj7:
+[174.61,220,261.63,329.63],
+
+G7:
+[196,246.94,293.66,349.23],
+
+Am7:
+[220,261.63,329.63,392],
+
+Dm7:
+[146.83,174.61,220,261.63],
+
+Em7:
+[164.81,196,246.94,293.66],
+
+Cadd9:
+[261.63,293.66,329.63,392],
+
+Fadd9:
+[174.61,196,220,261.63,349.23],
+
+Gsus4:
+[196,261.63,293.66,392],
+
+Csus2:
+[261.63,293.66,392],
+
+Csus4:
+[261.63,349.23,392]
+
 };
 
-let progression = [];
+
+/* ==============================
+   プリセット
+============================== */
+
+const presets = [
+
+["C","Am","Dm","F"],
+
+["C","G","Am","F"],
+
+["F","Em","Dm","C"],
+
+["Am","F","G","C"],
+
+["C","Dm","Em","F"],
+
+["Am","G","F","C"]
+
+];
+
+presets.forEach(arr=>{
+
+  const button =
+  document.createElement("button");
+
+  button.textContent =
+  arr.join(" → ");
+
+  button.onclick = ()=>{
+
+    arr.forEach((chord,i)=>{
+
+      document
+      .querySelector("#c"+i)
+      .value = chord;
+
+    });
+
+    update();
+
+  };
+
+  document
+  .querySelector("#presets")
+  .appendChild(button);
+
+});
+
+
+/* ==============================
+   現在のコード
+============================== */
+
+function current(){
+
+  return [0,1,2,3]
+  .map(i=>
+    document
+    .querySelector("#c"+i)
+    .value
+  );
+
+}
+
+function update(){
+
+  document
+  .querySelector("#progression")
+  .textContent =
+  current().join(" → ");
+
+}
+
+update();
+
+
+/* ==============================
+   Web Audio
+============================== */
+
 let audioContext = null;
-let isPlaying = false;
+let busy = false;
 
-async function prepareAudio() {
+function audio(){
 
-  if (!audioContext) {
+  if(!audioContext){
+
     audioContext =
-      new (window.AudioContext || window.webkitAudioContext)();
+    new (
+      window.AudioContext ||
+      window.webkitAudioContext
+    )();
+
   }
 
-  if (audioContext.state === "suspended") {
-    await audioContext.resume();
+  if(audioContext.state === "suspended"){
+    audioContext.resume();
   }
 
   return audioContext;
 }
 
-async function soundChord(name, duration = 1.2) {
 
-  const ctx = await prepareAudio();
+function tone(
+  frequency,
+  start,
+  duration,
+  volume = 0.08,
+  type = "sine"
+){
 
-  const start = ctx.currentTime;
-  const master = ctx.createGain();
+  const ctx = audio();
 
-  master.gain.setValueAtTime(0.0001, start);
-  master.gain.exponentialRampToValueAtTime(0.7, start + 0.015);
-  master.gain.exponentialRampToValueAtTime(
+  const oscillator =
+  ctx.createOscillator();
+
+  const gain =
+  ctx.createGain();
+
+  oscillator.type =
+  type;
+
+  oscillator.frequency.value =
+  frequency;
+
+  gain.gain.setValueAtTime(
+    0.0001,
+    start
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
+    volume,
+    start + 0.012
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
     0.0001,
     start + duration
   );
 
-  master.connect(ctx.destination);
+  oscillator.connect(gain);
 
-  chordData[name].notes.forEach((frequency, index) => {
+  gain.connect(
+    ctx.destination
+  );
 
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
+  oscillator.start(start);
 
-    osc.type = "triangle";
-    osc.frequency.setValueAtTime(frequency, start);
+  oscillator.stop(
+    start +
+    duration +
+    0.03
+  );
 
-    gain.gain.value = 0.07 / (1 + index * 0.08);
+}
 
-    osc.connect(gain);
-    gain.connect(master);
 
-    osc.start(start);
-    osc.stop(start + duration + 0.05);
+/* ==============================
+   コード再生
+============================== */
+
+function chord(
+  name,
+  start,
+  duration
+){
+
+  const notes =
+  chordMap[name] || [];
+
+  notes.forEach(
+    (frequency,index)=>{
+
+      tone(
+        frequency,
+        start,
+        duration,
+        0.033 /
+        (1 + index*0.04),
+        "triangle"
+      );
+
+    }
+  );
+
+}
+
+
+/* ==============================
+   Aメロ メロディー
+
+   録音タイミングを反映
+   音程は確定済みデータを使用
+============================== */
+
+function playMelody(start){
+
+  const melody = [
+
+  // ほー
+  [329.63,0.00,0.49],
+
+  // こ
+  [329.63,0.51,0.20],
+
+  // りー！
+  [293.66,0.74,0.34],
+  [261.63,1.08,0.29],
+
+  // 1.41〜1.60 は休み
+
+  // か
+  [196.00,1.60,0.14],
+
+  // ぶっ
+  [329.63,1.77,0.30],
+
+  // て
+  [293.66,2.22,0.35],
+
+  // るぅ！
+  [261.63,2.65,0.84]
+
+  ];
+
+  melody.forEach(note=>{
+
+    tone(
+      note[0],
+      start + note[1],
+      note[2],
+      0.10,
+      "sine"
+    );
+
   });
+
 }
 
-async function addChord(name) {
 
-  await prepareAudio();
+/* ==============================
+   再生
+============================== */
 
-  soundChord(name, 0.9);
+async function play(
+  withChords
+){
 
-  document.getElementById("meaning").textContent =
-    chordData[name].text;
+  if(busy) return;
 
-  if (progression.length >= 8) {
+  busy = true;
+
+  const ctx =
+  audio();
+
+  const start =
+  ctx.currentTime + 0.08;
+
+  const chords =
+  current();
+
+  const positions = [
+
+  0,
+
+  Number(
+    document
+    .querySelector("#s1")
+    .value
+  ),
+
+  Number(
+    document
+    .querySelector("#s2")
+    .value
+  ),
+
+  Number(
+    document
+    .querySelector("#s3")
+    .value
+  ),
+
+  3.55
+
+  ];
+
+
+  /* 順番チェック */
+
+  if(
+    !(
+      positions[0] <
+      positions[1] &&
+
+      positions[1] <
+      positions[2] &&
+
+      positions[2] <
+      positions[3] &&
+
+      positions[3] <
+      positions[4]
+    )
+  ){
+
+    document
+    .querySelector("#status")
+    .textContent =
+    "コードチェンジ位置を順番になるよう選んでください";
+
+    busy = false;
+
     return;
   }
 
-  progression.push(name);
-  renderProgression();
-}
 
-function renderProgression(activeIndex = -1) {
+  /* メロディー */
 
-  const box = document.getElementById("progression");
+  playMelody(start);
 
-  if (progression.length === 0) {
-    box.innerHTML =
-      '<span class="empty">上のコードを押してみよう</span>';
-    return;
-  }
 
-  box.innerHTML = "";
+  /* コード */
 
-  progression.forEach((name, index) => {
+  if(withChords){
 
-    const step = document.createElement("div");
-    step.className = "step";
+    for(let i=0;i<4;i++){
 
-    const code = document.createElement("div");
-    code.className =
-      "step-code" + (index === activeIndex ? " playing" : "");
+      chord(
 
-    code.textContent = name;
+        chords[i],
 
-    step.appendChild(code);
+        start +
+        positions[i],
 
-    if (index < progression.length - 1) {
-      const arrow = document.createElement("span");
-      arrow.className = "arrow";
-      arrow.textContent = "→";
-      step.appendChild(arrow);
+        Math.max(
+          0.08,
+
+          positions[i+1] -
+          positions[i] -
+          0.02
+        )
+
+      );
+
     }
 
-    box.appendChild(step);
-  });
-}
-
-function undoChord() {
-
-  if (isPlaying) return;
-
-  progression.pop();
-  renderProgression();
-}
-
-function clearProgression() {
-
-  if (isPlaying) return;
-
-  progression = [];
-  renderProgression();
-
-  document.getElementById("meaning").textContent =
-    "コードを押すと、そのコードの感じをここに表示します。";
-}
-
-function updateTempo() {
-
-  document.getElementById("bpmValue").textContent =
-    document.getElementById("tempo").value;
-}
-
-function wait(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function playProgression() {
-
-  if (isPlaying || progression.length === 0) return;
-
-  await prepareAudio();
-
-  isPlaying = true;
-
-  const button = document.getElementById("playButton");
-  button.textContent = "再生中…";
-
-  const bpm =
-    Number(document.getElementById("tempo").value);
-
-  const beat = 60000 / bpm;
-
-  for (let i = 0; i < progression.length; i++) {
-
-    const name = progression[i];
-
-    renderProgression(i);
-
-    document.getElementById("meaning").textContent =
-      name + "： " + chordData[name].text;
-
-    await soundChord(name, beat / 1000 * 0.9);
-    await wait(beat);
   }
 
-  renderProgression();
 
-  button.textContent = "▶ 最初から聴く";
+  document
+  .querySelector("#status")
+  .textContent =
+  withChords
+  ?
+  chords.join(" → ") +
+  " 再生中…"
+  :
+  "メロディー再生中…";
 
-  isPlaying = false;
+
+  await new Promise(
+    resolve =>
+    setTimeout(
+      resolve,
+      3700
+    )
+  );
+
+
+  busy = false;
+
+  document
+  .querySelector("#status")
+  .textContent =
+  "候補を変えて何度でも比較できます";
+
 }
+
+
+/* ==============================
+   ボタン
+============================== */
+
+document
+.querySelector("#melody")
+.onclick =
+()=>play(false);
+
+
+document
+.querySelector("#both")
+.onclick =
+()=>play(true);
+
+
+document
+.querySelector("#reset")
+.onclick =
+()=>{
+
+  defaults.forEach(
+    (chord,i)=>{
+
+      document
+      .querySelector("#c"+i)
+      .value =
+      chord;
+
+    }
+  );
+
+  document
+  .querySelector("#s1")
+  .value =
+  0.51;
+
+  document
+  .querySelector("#s2")
+  .value =
+  1.41;
+
+  document
+  .querySelector("#s3")
+  .value =
+  2.65;
+
+  update();
+
+  document
+  .querySelector("#status")
+  .textContent =
+  "リセットしました";
+
+};
 
 </script>
 
